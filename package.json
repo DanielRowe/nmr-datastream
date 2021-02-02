@@ -1,0 +1,15 @@
+{
+  "name": "nmr-datastream",
+  "version": "1.0.0",
+  "description": "Converts NMR Datastream specification to JS Objects - allowing access to milk recording data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Rowe",
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.5.2",
+    "file-type": "^16.2.0"
+  }
+}
