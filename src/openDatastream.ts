@@ -32,6 +32,9 @@ export const openDatastream = async (file: string | Buffer | URL | fs.FileHandle
           result = zipFile.getData().toString('utf-8');  // Get data and convert to string.
         }
       })
+      if(result === '') {
+        throw new Error('DSMember.DAT not found within EXE');
+      }
       return result;
     } else {
       const fileContents = file.toString(); // Convert to string
@@ -52,6 +55,9 @@ export const openDatastream = async (file: string | Buffer | URL | fs.FileHandle
           result = zipFile.getData().toString('utf-8');
         }
       })
+      if(result === '') {
+        throw new Error('DSMember.DAT not found within EXE');
+      }
       return result;
     } else {
       const fileFormat = file.split('.')?.pop()?.toLocaleLowerCase();
