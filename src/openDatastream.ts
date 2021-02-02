@@ -18,12 +18,13 @@
 import { promises as fs } from "fs";
 import { default as FileType } from 'file-type';
 import AdmZip from 'adm-zip';
+import { URL } from "url";
 
-export const openDatastream = async (file) => {
+export const openDatastream = async (file: string | Buffer | URL | fs.FileHandle) => {
   // Handle applicably if buffer passed to opener.
   if(Buffer.isBuffer(file)) {
     const fileFormat = await FileType.fromBuffer(file);
-    if(fileFormat.ext === 'exe') {
+    if(fileFormat?.ext === 'exe') {
       const zip = new AdmZip(file);  // Extract contents of exe.
       let result = '';
       zip.getEntries().map((zipFile) => {
@@ -53,7 +54,8 @@ export const openDatastream = async (file) => {
       })
       return result;
     } else {
-      if(file.split('.').pop().toLowerCase() === "dat") { // Check the file format is a .dat
+      const fileFormat = file.split('.')?.pop()?.toLocaleLowerCase();
+      if(fileFormat === "dat") { // Check the file format is a .dat
         const output = await fs.readFile(file, 'utf-8');
         return output;
       }
