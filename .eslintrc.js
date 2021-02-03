@@ -1,24 +1,19 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: 'airbnb',
   env: {
-    browser: true,
-    commonjs: false,
-    es6: true,
+    es2021: true,
     node: true,
-    mocha: false,
-    jest: true,
-    mongo: true,
   },
-  globals: {},
+  extends: [
+    'airbnb-base',
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
   },
+  plugins: [
+    '@typescript-eslint',
+  ],
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
     'no-console': ['error', { allow: ['warn', 'error'] }],
@@ -29,14 +24,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'error',
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'error',
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'import/extensions': 'off',
-  },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
+    'import/no-unresolved': 'off',
   },
 };

@@ -27,7 +27,7 @@ A datastream file will contain the following information:
   - [Convert everything to JSON](#convert-to-json)
 - [API](#api)
   - Basic Functions
-    - openDatastream
+    - [openDatastream](#openDatastream)
     - herdInformation
     - herdRecordings
     - cowList
@@ -44,8 +44,8 @@ A datastream file will contain the following information:
     - cowListComplete
     - toJSON
     - findCowInformation
-  - Utils
-    - toDate
+  - [Utils](#utils)
+    - [toDate](#utils-todate)
     - breedCodeToText
     - breedCodeToBCMS
 - [Issues / Feature Requests](#issues-and-feature-requests)
@@ -98,16 +98,34 @@ import { write } from "fs/promises";
 })();
 ```
 # API
+## openDatastream
+`openDatastream(string (filepath) or buffer)`
 
-## Issues and Feature Requests
+Will open a datastream file either from a .DAT file or .EXE, and can either be provided with a string detailing the filepath, or a buffer containing the file.
+
+This function doesn't have to be used prior to other functions but is useful for extracting provided .EXE files.
+
+**Returns:** *string* (contents of datastream file)
+
+## Utils
+## Utils toDate
+`utils.toDate(YYMMDD)`
+
+Simple converter from string date format commonly used within the datastream of `YYMMDD` to a date object.
+
+Any date after 1980 currently becomes post 2000.
+
+**Returns:** *Date Object*
+
+# Issues and Feature Requests
 Feel free to submit issues and enhancement requests.
 
 These are handled through Github Issues.
 
-## Get in Touch
+# Get in Touch
 I'd love to hear from you if you're using this! Drop me an email [hello@danrowe.me](hello@danrowe.me)
 
-## Contributing
+# Contributing
 Please refer to each project's style and contribution guidelines for submitting patches and additions. In general, we follow the "fork-and-pull" Git workflow.
 
 - Fork the repo on GitHub
@@ -118,7 +136,7 @@ Please refer to each project's style and contribution guidelines for submitting 
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
-## Licence
+# Licence
 *MIT Licence*
 
 Copyright 2021 - Daniel Rowe
