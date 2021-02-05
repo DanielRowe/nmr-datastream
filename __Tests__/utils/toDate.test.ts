@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import toDate from '../../src/utils/toDate';
 
 test('Throws exception to empty string', () => {
