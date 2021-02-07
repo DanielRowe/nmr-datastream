@@ -28,19 +28,19 @@ A datastream file will contain the following information:
 - [API](#api)
   - Basic Functions
     - [openDatastream](#openDatastream)
-    - herdInformation
-    - herdRecordings
-    - cowList
-    - statementInformation
+    - [herdInformation](#herdInformation)
+    - [herdRecordings](#herdRecordings)
+    - [cowList](#cowList)
+    - [statementInformation](#statementInformation)
     - services
     - samples
     - healthEvents
     - otherEvents
     - calvings
     - currentLactationInformation
-    - lactationList
-    - bullList
-    - deadDamList
+    - [lactationList](#lactationList)
+    - [bullList](#bullList)
+    - [deadDamList](#deadDamList)
     - cowListComplete
     - toJSON
     - findCowInformation
@@ -106,6 +106,84 @@ Will open a datastream file either from a .DAT file or .EXE, and can either be p
 This function doesn't have to be used prior to other functions but is useful for extracting provided .EXE files.
 
 **Returns:** *string* (contents of datastream file)
+
+## herdInformation
+`herdInformation(datastream (string))`
+
+Will find the herd information within the datastream file and return it all as a useful object.
+
+Basic herd information including farm address, herd prefix and number. Mainly information relevant to the milk recording company.
+
+**Returns:** 
+*object* 
+[See Wiki for more detail](https://github.com/DanielRowe/nmr-datastream/wiki/Herd-Information)
+
+## herdRecordings
+`herdRecordings(datastream (string))`
+
+Will find an overview of each sampling date including total animals and animals in milk. Also contains any bulk sample results.
+
+**Returns:** 
+*array* 
+[See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Herd-Recordings)
+
+## cowList
+`cowList(datastream (string))`
+
+Will find the cow information within the datastream file and return it all as a useful array of objects.
+
+All cow information including line number, official identifier (ear tag or herdbook number), breed, date of birth, date of entry / departure, name, parental information and PTAs
+
+**Returns:** 
+*array* 
+[See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Cow-List)
+
+## statementInformation
+`statementInformation(datastream (string))`
+
+Will find the statement information within the datastream file and return it all as a useful array of objects.
+
+Events relevant to each cow, including milk recording results, services, latest calving, lactation overview and other relevant health events.
+
+**Returns:** 
+*array* 
+[See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Statement-Information)
+
+## lactationList
+`lactationList(datastream (string))`
+
+Will find the lactation information within the datastream file and return it all as a useful array of objects.
+
+A lactation overview relevant to each cow, including 305 day qualifying lactations, natural lactations and other relevant information including calvings, total services and relevant health information. 
+
+**There is a separate lactation overview per lactation for each cow.**
+
+**Returns:** 
+*array* 
+[See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Lactation-List)
+
+## bullList
+`bullList(datastream (string))`
+
+Will find the bull information within the datastream file and return it all as a useful array of objects.
+
+Contains PTA overview for each of the bulls used within the file including services or sires.
+
+
+**Returns:** 
+*array* 
+[See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Bull-List)
+
+## deadDamList
+`deadDamList(datastream (string))`
+
+A dead dam is a dam who only has daughters in the herd or has been dead for a long time. It contains the dams name and identity information, and PTAs. These are used to save space over a full cow overview.
+
+This function finds *dead dams* from the datastream and returns them as a useful array full of objects.
+
+**Returns:**
+*array* 
+[See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Dead-Dam-List)
 
 ## Utils
 ## Utils toDate
