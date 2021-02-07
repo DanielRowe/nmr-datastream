@@ -15,7 +15,7 @@
  *
  */
 /// <reference types="node" />
-import { promises as fs } from "fs";
-import { URL } from "url";
-export declare const openDatastream: (file: string | Buffer | URL | fs.FileHandle) => Promise<string | false>;
+import { promises as fs } from 'fs';
+import { URL } from 'url';
+export declare const openDatastream: (file: string | Buffer | URL | fs.FileHandle) => Promise<string>;
 export default openDatastream;
