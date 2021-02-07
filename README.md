@@ -2,7 +2,7 @@
 
 Datastreams are provided by milk recording companies (in the UK) including NMR and CIS, and are updated following each milk recording session.
 
-The original specification was created in 1989, working upon this specification which can be found in the wiki the following library was built. 
+The original specification was created in 1989, working upon this specification which [can be found in the wiki](files/datastream_specification.pdf) the following library was built. 
 
 The library will take any valid datastream file and convert it to a javascript object as described - this could then be inserted into a database or converted to a csv for example.
 
