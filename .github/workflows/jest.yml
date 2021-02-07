@@ -27,7 +27,7 @@ jobs:
 
       # Run Jest
       - name: Install modules
-      run: yarn
+        run: yarn
       
-    - name: Run tests
-      run: yarn test
+      - name: Run tests
+        run: yarn test
