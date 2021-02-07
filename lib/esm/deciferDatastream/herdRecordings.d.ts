@@ -1,0 +1,20 @@
+export declare const herdRecordings: (datastream: string) => {
+    date: Date;
+    totalAnimals: number;
+    cowsInMilk: number;
+    cowsIn3xMilk: number;
+    totalWeightOfMilk: number;
+    totalWeightOfFat: number;
+    totalWeightOfProtein: number;
+    totalWeightOfLactose: number;
+    differenceReason: string | undefined;
+    numberMissedWeights: number;
+    printEligible: boolean;
+    bulkYield: number;
+    bulkFatPercentage: number;
+    bulkProteinPercentage: number;
+    bulkLactosePercentage: number;
+    herdProductionBase: number;
+    bulkSCC: number;
+}[];
+export default herdRecordings;
