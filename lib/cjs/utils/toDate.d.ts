@@ -5,6 +5,6 @@
  * Params @string (string) expects YYMMDD.
  * Returns Date object
  *
-**/
+* */
 export declare const toDate: (string: string) => Date;
 export default toDate;
