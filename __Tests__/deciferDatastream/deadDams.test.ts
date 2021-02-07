@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
 import fs from 'fs/promises';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'jest-extended';
 import deadDams from '../../src/deciferDatastream/deadDams';
 
