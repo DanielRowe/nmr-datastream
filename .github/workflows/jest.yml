@@ -24,3 +24,7 @@ jobs:
       
       - name: Run tests
         run: yarn test
+        
+      - name: ESLint Plus
+        uses: bradennapier/eslint-plus-action@v3
+
