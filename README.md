@@ -1,4 +1,9 @@
 # NMR-Datastream Converter
+![CI](https://github.com/danielrowe/nmr-datastream/workflows/CI/badge.svg)  [![codecov](https://codecov.io/gh/DanielRowe/nmr-datastream/branch/master/graph/badge.svg?token=7BIRS3MA7F)](https://codecov.io/gh/DanielRowe/nmr-datastream) [![Maintainability](https://api.codeclimate.com/v1/badges/d0cd4d562aa4ad5ec02a/maintainability)](https://codeclimate.com/github/DanielRowe/nmr-datastream/maintainability) [![Known Vulnerabilities](https://snyk.io/test/github/DanielRowe/nmr-datastream/badge.svg?targetFile=package.json)](https://snyk.io/test/github/DanielRowe/nmr-datastream?targetFile=package.json) ![Licence](https://img.shields.io/github/license/danielrowe/nmr-datastream) 
+
+![Dependencies](https://img.shields.io/david/danielrowe/nmr-datastream) ![Dev Dependencies](https://img.shields.io/david/dev/danielrowe/nmr-datastream) 
+
+
 
 Datastreams are provided by milk recording companies (in the UK) including NMR and CIS, and are updated following each milk recording session.
 
@@ -203,7 +208,7 @@ These are handled through Github Issues.
 # Get in Touch
 I'd love to hear from you if you're using this! Drop me an email [hello@danrowe.me](hello@danrowe.me)
 
-# Contributing
+# Contributing  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/danielrowe/nmr-datastream/issues)
 Please refer to each project's style and contribution guidelines for submitting patches and additions. In general, we follow the "fork-and-pull" Git workflow.
 
 - Fork the repo on GitHub
