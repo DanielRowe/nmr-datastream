@@ -44,11 +44,11 @@ interface CowInfo {
     authentic: boolean,
     assumed: boolean,
     calves?: {
-      breed: string,
-      identity: string,
-      identityType: string | undefined,
-      identityAuthentic: boolean,
-      sex: string,
+      breed:string,
+      id: string,
+      idType: string | undefined,
+      authenticID: boolean,
+      sex: string
     }[]
   }[],
   otherEvents: {
@@ -244,27 +244,27 @@ export const statementInformation = (datastream: string) => {
 
           // Populate calves depending if there's a second calf.
           const calves: {
-            breed: string,
-            identity: string,
-            identityType: string | undefined,
-            identityAuthentic: boolean,
+            breed:string,
+            id: string,
+            idType: string | undefined,
+            authenticID: boolean,
             sex: string,
           }[] = [];
           if (calf1Breed !== '00') {
             calves.push({
               breed: calf1Breed,
-              identity: calf1Identity.trim(),
-              identityType: IDTypeLookup.find((x) => x.case === calf1IdentityType)?.value,
-              identityAuthentic: (calf1IdentityAuthentic === '0'),
+              id: calf1Identity.trim(),
+              idType: IDTypeLookup.find((x) => x.case === calf1IdentityType)?.value,
+              authenticID: (calf1IdentityAuthentic === '0'),
               sex: calf1Sex,
             });
           }
           if (calf2Breed !== '00') {
             calves.push({
               breed: calf2Breed,
-              identity: calf2Identity.trim(),
-              identityType: IDTypeLookup.find((x) => x.case === calf2IdentityType)?.value,
-              identityAuthentic: (calf2IdentityAuthentic === '0'),
+              id: calf2Identity.trim(),
+              idType: IDTypeLookup.find((x) => x.case === calf2IdentityType)?.value,
+              authenticID: (calf2IdentityAuthentic === '0'),
               sex: calf2Sex,
             });
           }
@@ -290,9 +290,9 @@ export const statementInformation = (datastream: string) => {
 
           cow.calvings[cow.calvings.length - 1]?.calves?.push({ // push to last calving
             breed: calf3Breed,
-            identity: calf3Identity.trim(),
-            identityType: IDTypeLookup.find((x) => x.case === calf3IdentityType)?.value,
-            identityAuthentic: (calf3IdentityAuthentic === '0'),
+            id: calf3Identity.trim(),
+            idType: IDTypeLookup.find((x) => x.case === calf3IdentityType)?.value,
+            authenticID: (calf3IdentityAuthentic === '0'),
             sex: calf3Sex,
           });
           break;
