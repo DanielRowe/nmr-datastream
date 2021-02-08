@@ -27,4 +27,6 @@ jobs:
         
       - name: ESLint Plus
         uses: bradennapier/eslint-plus-action@v3
+      
+      - uses: codecov/codecov-action@v1
 
