@@ -53,8 +53,25 @@ export interface CowDefinition {
   };
 }
 
-export const cowList = (datastream:string) => { // params?: { startDate?: Date}
-  // console.warn(params);
+export const cowList = (
+  datastream:string,
+  params?: {
+    isYoungstock?: boolean,
+    dateOfBirth?: Date,
+    dateEnteredHerd?: Date,
+    inHerd?: boolean,
+    breedCode?: string,
+    sireIdentity?: string,
+  },
+) => {
+  /* let filter = {};
+  for (item in params) {
+    filter[item] = params[item];
+  } */
+  let filter = {};
+  if (params) {
+    filter = params;
+  }
   const cattleInfoStart = datastream.indexOf('C1');
   if (cattleInfoStart === -1) {
     throw new Error('Cattle information not found');
@@ -167,7 +184,35 @@ export const cowList = (datastream:string) => { // params?: { startDate?: Date}
       },
     });
   });
-  return cows;
+  // Sort the cows by any params provided.
+  const filterArray = Object.entries(filter); // Create an array of any filters.
+
+  const sortedCows = cows.filter((item) => {
+    // Create an inner return value - allows the inner functions to return a value to the filter.
+    let returnInner = true;
+
+    if (filterArray.length > 0) { // If we have items to filter...
+      filterArray.map((keyValue) => { // For every filter item...
+        const [key, value] = keyValue; // Key / Value from the filters
+        if (value instanceof Date) { // If it's a date we have to compare if it's greater value.
+          if ((item as any)[key] === undefined || (item as any)[key] < value) {
+            returnInner = false;
+            return false;
+          }
+        } else {
+          // If not defined or doesn't match the value wanted then we don't need it.
+          if ((item as any)[key] === undefined || (item as any)[key] !== value) {
+            returnInner = false;
+            return false;
+          }
+          return true;
+        }
+        return true;
+      });
+    }
+    return returnInner;
+  });
+  return sortedCows;
 };
 
 export default cowList;
