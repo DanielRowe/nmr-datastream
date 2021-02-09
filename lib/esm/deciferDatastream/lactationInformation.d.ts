@@ -14,7 +14,7 @@ interface LactationObject {
     averageCellCount: number;
     cellCountsOver200: number;
 }
-interface LactationInfo {
+export interface LactationInfo {
     DSIdentifier?: string;
     lineNumber?: number;
     lactationNumber?: number;

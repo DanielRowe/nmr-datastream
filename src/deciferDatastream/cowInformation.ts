@@ -4,6 +4,55 @@ import { IDType as IDTypeLookup } from '../lookups/IDType';
 import { pedigreeStatus as pedigreeStatusLookup } from '../lookups/pedigreeStatus';
 import ptaSource from '../lookups/ptaSource';
 
+export interface CowDefinition {
+  producerNumber: number;
+  herdCode: number;
+  lineNumber: number;
+  DSIdentifier: string;
+  breedCode: string;
+  otherBreedCode: string;
+  identityNumber: string;
+  IDType: string | undefined;
+  alternateIDNumber: string;
+  pedigreeStatus: string | undefined;
+  pedigreeClassChangeDate: Date | null;
+  genuineIdentity: boolean;
+  shortName: string;
+  longName: string;
+  isYoungstock: boolean;
+  dateOfBirth: Date;
+  dateEnteredHerd: Date | null;
+  dateLeftHerd: Date | null;
+  inHerd: boolean;
+  leftHerd: string | {
+    date: Date;
+    reason: string | undefined;
+  };
+  sireInformation: {
+    breed: string;
+    identity: string;
+    IDType: string | undefined;
+  };
+  damInformation: {
+    breed: string;
+    identity: string;
+    IDType: string | undefined;
+    pedigreeStatus: string | undefined;
+    genuineIdentity: boolean;
+  };
+  PTA: {
+    evaluationGroup: string | undefined;
+    evaluationSource: string | undefined;
+    evaluationDate: Date | null;
+    reliability: number;
+    milkKG: number;
+    fatKG: number;
+    proteinKG: number;
+    fatPercentage: number;
+    proteinPercentage: number;
+  };
+}
+
 export const cowList = (datastream:string) => { // params?: { startDate?: Date}
   // console.warn(params);
   const cattleInfoStart = datastream.indexOf('C1');
@@ -20,54 +69,7 @@ export const cowList = (datastream:string) => { // params?: { startDate?: Date}
     throw new Error('No cow information found');
   }
 
-  const cows: {
-    producerNumber: number;
-    herdCode: number;
-    lineNumber: number;
-    DSIdentifier: string;
-    breedCode: string;
-    otherBreedCode: string;
-    identityNumber: string;
-    IDType: string | undefined;
-    alternateIDNumber: string;
-    pedigreeStatus: string | undefined;
-    pedigreeClassChangeDate: Date | null;
-    genuineIdentity: boolean;
-    shortName: string;
-    longName: string;
-    isYoungstock: boolean;
-    dateOfBirth: Date;
-    dateEnteredHerd: Date | null;
-    dateLeftHerd: Date | null;
-    inHerd: boolean;
-    leftHerd: string | {
-      date: Date;
-      reason: string | undefined;
-    };
-    sireInformation: {
-      breed: string;
-      identity: string;
-      IDType: string | undefined;
-    };
-    damInformation: {
-      breed: string;
-      identity: string;
-      IDType: string | undefined;
-      pedigreeStatus: string | undefined;
-      genuineIdentity: boolean;
-    };
-    PTA: {
-      evaluationGroup: string | undefined;
-      evaluationSource: string | undefined;
-      evaluationDate: Date | null;
-      reliability: number;
-      milkKG: number;
-      fatKG: number;
-      proteinKG: number;
-      fatPercentage: number;
-      proteinPercentage: number;
-    };
-  }[] = []; // Create empty array to populate.
+  const cows: CowDefinition[] = []; // Create empty array to populate.
 
   cowInfo.shift(); // First value is always blank - ignore it.
 

@@ -1,4 +1,4 @@
-export declare const cowList: (datastream: string) => {
+export interface CowDefinition {
     producerNumber: number;
     herdCode: number;
     lineNumber: number;
@@ -45,5 +45,6 @@ export declare const cowList: (datastream: string) => {
         fatPercentage: number;
         proteinPercentage: number;
     };
-}[];
+}
+export declare const cowList: (datastream: string) => CowDefinition[];
 export default cowList;
