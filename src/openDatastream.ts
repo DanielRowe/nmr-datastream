@@ -32,7 +32,7 @@ export const openDatastream = async (file: string | Buffer | URL | fs.FileHandle
           result = zipFile.getData().toString('utf-8');
           return result; // Get data and convert to string.
         }
-        return false;
+        return result;
       });
       if (result === '') {
         throw new Error('DSMember.DAT not found within EXE');

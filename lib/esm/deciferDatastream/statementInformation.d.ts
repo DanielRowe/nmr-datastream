@@ -42,9 +42,9 @@ interface CowInfo {
         assumed: boolean;
         calves?: {
             breed: string;
-            identity: string;
-            identityType: string | undefined;
-            identityAuthentic: boolean;
+            id: string;
+            idType: string | undefined;
+            authenticID: boolean;
             sex: string;
         }[];
     }[];
