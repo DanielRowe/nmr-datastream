@@ -72,7 +72,7 @@ interface CowInfo {
   }
 }
 
-export const statementInformation = (datastream: string) => {
+export const statementInformation = (datastream: string, afterDate: Date = new Date('1900-01-01')) => {
   // STATEMENT INFORMATION
   const statementInfo: CowInfo[] = [];
 
@@ -184,18 +184,20 @@ export const statementInformation = (datastream: string) => {
             { case: '4', value: 'Abnormal' },
           ];
           // Push this information to the original cow.
-          cow.milkSamples.push({
-            date: toDate(recordingDate),
-            timesMilked: parseInt(timesMilked, 10),
-            milkYield: (parseInt(milkYield, 10) / 10),
-            butterfatPercentage: (parseInt(butterfatPercentage, 10) / 100),
-            proteinPercentage: (parseInt(proteinPercentage, 10) / 100),
-            lactosePercentage: (parseInt(lactosePercentage, 10) / 100),
-            scc: parseInt(scc, 10),
-            // eslint-disable-next-line max-len
-            estimatedRemark: estimatedRemark.find((x) => x.case === recordingEstimatedRemark)?.value,
-            noSample: noSampleLookup.find((x) => x.case === noSampleReason)?.value,
-          });
+          if (toDate(recordingDate) >= afterDate) { // If after date specified in param.
+            cow.milkSamples.push({
+              date: toDate(recordingDate),
+              timesMilked: parseInt(timesMilked, 10),
+              milkYield: (parseInt(milkYield, 10) / 10),
+              butterfatPercentage: (parseInt(butterfatPercentage, 10) / 100),
+              proteinPercentage: (parseInt(proteinPercentage, 10) / 100),
+              lactosePercentage: (parseInt(lactosePercentage, 10) / 100),
+              scc: parseInt(scc, 10),
+              // eslint-disable-next-line max-len
+              estimatedRemark: estimatedRemark.find((x) => x.case === recordingEstimatedRemark)?.value,
+              noSample: noSampleLookup.find((x) => x.case === noSampleReason)?.value,
+            });
+          }
           break;
         }
         case '4': { // Service information
@@ -215,15 +217,17 @@ export const statementInformation = (datastream: string) => {
             { case: '2', value: 'Pregnant' },
           ];
           // Push to the cows information
-          cow.services.push({
-            date: toDate(serviceDate),
-            authenticService: (authenticService === '0'),
-            sireBreed: serviceSireBreed,
-            sireIdentity: serviceSireIdentity.trim(),
-            sireIDType: IDTypeLookup.find((x) => x.case === serviceSireIdType)?.value,
-            authenticSire: (serviceSireAuthentic === '0'),
-            pdStatus: pdStatusLookup.find((x) => x.case === pdStatus)?.value,
-          });
+          if (toDate(serviceDate) >= afterDate) { // If after param date.
+            cow.services.push({
+              date: toDate(serviceDate),
+              authenticService: (authenticService === '0'),
+              sireBreed: serviceSireBreed,
+              sireIdentity: serviceSireIdentity.trim(),
+              sireIDType: IDTypeLookup.find((x) => x.case === serviceSireIdType)?.value,
+              authenticSire: (serviceSireAuthentic === '0'),
+              pdStatus: pdStatusLookup.find((x) => x.case === pdStatus)?.value,
+            });
+          }
           break;
         }
         case '5': { // Calving
@@ -270,12 +274,14 @@ export const statementInformation = (datastream: string) => {
           }
 
           // Push data to cow.
-          cow.calvings.push({
-            date: toDate(calvingDate),
-            authentic: (authenticCalving === '0'),
-            assumed: false,
-            calves,
-          });
+          if (toDate(calvingDate) >= afterDate) { // If param specified - only return if after date.
+            cow.calvings.push({
+              date: toDate(calvingDate),
+              authentic: (authenticCalving === '0'),
+              assumed: false,
+              calves,
+            });
+          }
           break;
         }
         case '6': { // Third calf
@@ -288,24 +294,28 @@ export const statementInformation = (datastream: string) => {
             calf3Sex,
           ] = statement;
 
-          cow.calvings[cow.calvings.length - 1]?.calves?.push({ // push to last calving
-            breed: calf3Breed,
-            id: calf3Identity.trim(),
-            idType: IDTypeLookup.find((x) => x.case === calf3IdentityType)?.value,
-            authenticID: (calf3IdentityAuthentic === '0'),
-            sex: calf3Sex,
-          });
+          if (cow.calvings.length > 1) { // Providing we have a calving to push to...
+            cow.calvings[cow.calvings.length - 1]?.calves?.push({ // push to last calving
+              breed: calf3Breed,
+              id: calf3Identity.trim(),
+              idType: IDTypeLookup.find((x) => x.case === calf3IdentityType)?.value,
+              authenticID: (calf3IdentityAuthentic === '0'),
+              sex: calf3Sex,
+            });
+          }
           break;
         }
         case '7': { // Date of assumed calving
           const [, // row identifier
             assumedCalvingDate,
           ] = statement;
-          cow.calvings.push({
-            date: toDate(assumedCalvingDate),
-            authentic: true,
-            assumed: true,
-          });
+          if (toDate(assumedCalvingDate) >= afterDate) {
+            cow.calvings.push({
+              date: toDate(assumedCalvingDate),
+              authentic: true,
+              assumed: true,
+            });
+          }
           break;
         }
         case '8': // No sample
@@ -345,11 +355,13 @@ export const statementInformation = (datastream: string) => {
             eventDate,
             authenticEvent, // 0 = true, 1 = false
           ] = statement;
-          cow.otherEvents.push({
-            date: toDate(eventDate),
-            eventType: eventDescription.find((x) => x.case === eventKey)?.value,
-            authenticEvent: (authenticEvent === '0'),
-          });
+          if (toDate(eventDate) >= afterDate) {
+            cow.otherEvents.push({
+              date: toDate(eventDate),
+              eventType: eventDescription.find((x) => x.case === eventKey)?.value,
+              authenticEvent: (authenticEvent === '0'),
+            });
+          }
           break;
         }
         case 'X': { // Current lactation info

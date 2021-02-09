@@ -52,3 +52,19 @@ test('Throws exception to invalid herd information string', () => {
 
   expect(invalidString).toThrow();
 });
+
+test('Expect event dates to only return after date', () => {
+  const data = statementInformation(datastream, new Date('2006-11-01'));
+
+  expect(data).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        services: expect.arrayContaining([
+          expect.objectContaining({
+            date: expect.toBeAfter(new Date('2006-11-01')),
+          }),
+        ]),
+      }),
+    ]),
+  );
+});
