@@ -54,3 +54,25 @@ test('Throws exception to invalid herd information string', () => {
 
   expect(invalidString).toThrow();
 });
+
+test('Expect isYoungstock param not to return cows', () => {
+  const data = cowInformation(datastream, { isYoungstock: true });
+
+  expect(data).toEqual(
+    expect.arrayContaining([
+      expect.toContainEntry(['isYoungstock', true]),
+    ]),
+  );
+});
+
+test('Expect dateOfBirth to only return animals born after date', () => {
+  const data = cowInformation(datastream, { dateOfBirth: new Date('2005-01-01') });
+
+  expect(data).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        dateOfBirth: expect.toBeAfter(new Date('2005-01-01')),
+      }),
+    ]),
+  );
+});
