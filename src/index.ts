@@ -6,6 +6,8 @@ import { herdInformation } from './deciferDatastream/herdInformation';
 import { herdRecordings } from './deciferDatastream/herdRecordings';
 import { lactationsList } from './deciferDatastream/lactationInformation';
 import { statementInformation } from './deciferDatastream/statementInformation';
+import { cowListComplete } from './cowListComplete';
+import { toJSON } from './toJSON';
 
 import {
   services,
@@ -33,5 +35,7 @@ export {
   otherEvents,
   currentLactationInformation,
   calvings,
+  cowListComplete,
+  toJSON,
   utils,
 };

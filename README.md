@@ -46,8 +46,8 @@ A datastream file will contain the following information:
     - [lactationList](#lactationList)
     - [bullList](#bullList)
     - [deadDamList](#deadDamList)
-    - cowListComplete
-    - toJSON
+    - [cowListComplete](#cowListComplete)
+    - [toJSON](#toJSON)
     - findCowInformation
   - [Utils](#utils)
     - [toDate](#todate)
@@ -321,6 +321,37 @@ A complete array of data of the current lactation from the datastream file, cont
   averagePPL: number,
   seasonalityApplied: boolean,
   averageSCC: number,
+}
+```
+## cowListComplete
+`cowListComplete(datastream (string))`
+
+A list of all the cows from the datastream with all relevant information including milk samples, services, events, lactations and general cow information combined.
+
+This function combines the [cowList](#cowList), [lactationsList](#lactationList) and [statementInformation](#statementInformation).
+
+[Refer to the Wiki](https://github.com/DanielRowe/nmr-datastream/wiki/) for the previously mentioned functions to determine information returned.
+
+**Returns** *Array*
+
+## toJSON
+`toJSON(datastream (string), cowListComplete(boolean))`
+
+Converts your datastream file to a single output in a JSON like format.
+
+**Params:**
+datastream *(string)* - String of datastream contents <br />cowListComplete *(boolean - Default: false)* - True to use cowListComplete rather than separate the information.
+
+**Returns** *Object*
+```js
+{
+  herdInformation: object // See herdInformation function
+  herdRecordings: array // See herdRecordings function
+  cows: array // See cowList function
+  lactations: array // If not using cowCompleteList. Uses lactationList function
+  statementInformation: array // If not using cowCompleteList. Uses statementInformation function
+  bulls: array // If in datastream. See bullList function for more info
+  deadDams: array // If in datastream. See deadDams function for more info
 }
 ```
 
