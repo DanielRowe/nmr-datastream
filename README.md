@@ -52,7 +52,6 @@ A datastream file will contain the following information:
   - [Utils](#utils)
     - [toDate](#todate)
     - breedCodeToText
-    - breedCodeToBCMS
 - [Issues / Feature Requests](#issues-and-feature-requests)
 - [Get in Touch](#get-in-touch)
 - [Contributing](#contributing)
@@ -137,6 +136,8 @@ Will find an overview of each sampling date including total animals and animals 
 
 Will find the cow information within the datastream file and return it all as a useful array of objects.
 
+If interested in filtering the result - [please see the wiki for available params.](https://github.com/DanielRowe/nmr-datastream/wiki/Cow-List)
+
 All cow information including line number, official identifier (ear tag or herdbook number), breed, date of birth, date of entry / departure, name, parental information and PTAs
 
 **Returns:** 
@@ -144,9 +145,11 @@ All cow information including line number, official identifier (ear tag or herdb
 [See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Cow-List)
 
 ## statementInformation
-`statementInformation(datastream (string))`
+`statementInformation(datastream (string), afterDate (date - optional))`
 
 Will find the statement information within the datastream file and return it all as a useful array of objects.
+
+`afterDate` is optional, but allows you to filter by events to only those after the date specified.
 
 Events relevant to each cow, including milk recording results, services, latest calving, lactation overview and other relevant health events.
 
