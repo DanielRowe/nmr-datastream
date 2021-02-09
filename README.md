@@ -31,18 +31,18 @@ A datastream file will contain the following information:
   - [Installation & set up](#installation)
   - [Convert everything to JSON](#convert-to-json)
 - [API](#api)
-  - Basic Functions
+  - [Basic Functions](#api)
     - [openDatastream](#openDatastream)
     - [herdInformation](#herdInformation)
     - [herdRecordings](#herdRecordings)
     - [cowList](#cowList)
     - [statementInformation](#statementInformation)
-    - services
-    - samples
-    - healthEvents
-    - otherEvents
-    - calvings
-    - currentLactationInformation
+    - [services](#services)
+    - [samples](#samples)
+    - [healthEvents](#healthEvents)
+    - [otherEvents](#otherEvents)
+    - [calvings](#calvings)
+    - [currentLactationInformation](#currentLactationInformation)
     - [lactationList](#lactationList)
     - [bullList](#bullList)
     - [deadDamList](#deadDamList)
@@ -50,7 +50,7 @@ A datastream file will contain the following information:
     - toJSON
     - findCowInformation
   - [Utils](#utils)
-    - [toDate](#utils-todate)
+    - [toDate](#todate)
     - breedCodeToText
     - breedCodeToBCMS
 - [Issues / Feature Requests](#issues-and-feature-requests)
@@ -190,8 +190,142 @@ This function finds *dead dams* from the datastream and returns them as a useful
 *array* 
 [See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Dead-Dam-List)
 
-## Utils
-## Utils toDate
+## Services
+`services(datastream (string))`
+
+A complete array of all services from the datastream file, containing only the cows line number and service information.
+
+**Returns:** *array of objects*
+```js
+{
+  DSIdentifier: string,  // See Wiki for further info
+  liveFlag: string, // See Wiki (DSIdentifier Page) for further info
+  lineNumber: number,
+  date: Date,
+  authenticService: boolean,
+  sireBreed: string,
+  sireIdentity: string, // See Wiki -> ID Types for further info
+  sireIDType: string,
+  authenticSire: boolean,
+  pdStatus: string, // Not Diagnosed, Not Pregnant or Pregnant
+}
+```
+## Samples
+`samples(datastream (string))`
+
+A complete array of all samples from the datastream file, containing only the cows line number and service information.
+
+**Returns:** *array of objects*
+```js
+{
+  DSIdentifier: string, // See wiki for further info
+  liveFlag: string, // See Wiki (DSIdentifier Page) for further info
+  lineNumber: number,
+  date: Date,
+  timesMilked: number,
+  milkYield: number, // 000.0
+  butterfatPercentage: number, //00.00
+  proteinPercentage: number, // As above
+  lactosePercentage: number, // As above
+  scc: number, // (x10^3)
+  estimatedRemark: string | boolean, // false, 'Fat / Protein / Lactose Estimated', 'Full Estimate (Absent)', 'Full Estimate (Sick)'
+  noSample: string | boolean, // false, 'No Sample', 'Spilt', 'Sour', 'Dirty', 'Abnormal'
+}
+```
+
+## healthEvents
+`healthEvents(datastream (string))`
+
+A complete array of all health events from the datastream file, containing the cows line number, event type and date.
+
+Health events only include mastitis, lameness and sickness events.
+
+**Returns** *array of objects*
+```js
+{
+  DSIdentifier: string, // See wiki for more info
+  liveFlag: string, // See wiki (same page as above)
+  lineNumber: number,
+  date: Date,
+  eventType: string,
+}
+```
+
+## otherEvents
+`otherEvents(datastream (string))`
+
+A complete array of all other events from the datastream file, containing the cows line number, event type and date.
+
+Other events including deaths, sales, abortions, barren, dry, sucking and 1x milking, but none covered by healthEvents.
+
+**Returns** *array of objects*
+```js
+{
+  DSIdentifier: string, // See wiki for more info
+  liveFlag: string, // See wiki (same page as above)
+  lineNumber: number,
+  date: Date,
+  eventType: string,
+}
+```
+
+## Calvings
+`calvings(datastream (string))`
+
+A complete array of all calvings from the datastream file, containing only the cows line number and calving information.
+
+**Returns:** *array of objects*
+```js
+{
+  DSIdentifier: string, // See wiki for more info
+  lineNumber: number,
+  date: Date,
+  assumed: boolean,
+  // Sire information MIGHT not be included if not on datastream.
+  sireBreed: string,
+  sireID: string,
+  sireIDType: string, // See wiki for more info
+  sireAuthenticID: boolean,
+  calves: [
+    {
+      breed:string,
+      id: string,
+      idType: string, // See wiki for more info
+      authenticID: boolean,
+      sex: string
+    }
+  ],
+}
+```
+
+## currentLactationInformation
+`currentLactationInformation(datastream (string))`
+
+A complete array of data of the current lactation from the datastream file, containing only the cows line number and relevant information.
+
+**Returns** *array of objects*
+```js
+{
+  DSIdentifier: string, // See wiki for more info
+  liveFlag: string, // See wiki for more info
+  lineNumber: number,
+  lactationDays: number, // 000
+  totalMilkKG: number, // 00000.0
+  totalFatKG: number, // 000.00
+  totalProteinKG: number, // as above
+  totalLactoseKG: number,  // as above
+  totalFatPercentage: number, // 00.00
+  totalProteinPercentage: number, // as above
+  totalLactosePercentage: number, // as above
+  totalValue: number, // value of milk
+  averagePPL: number,
+  seasonalityApplied: boolean,
+  averageSCC: number,
+}
+```
+
+# Utils
+## toDate
 `utils.toDate(YYMMDD)`
 
 Simple converter from string date format commonly used within the datastream of `YYMMDD` to a date object.
@@ -203,7 +337,7 @@ Any date after 1980 currently becomes post 2000.
 # Issues and Feature Requests
 Feel free to submit issues and enhancement requests.
 
-These are handled through Github Issues.
+These are handled through [Github Issues](https://github.com/DanielRowe/nmr-datastream/issues).
 
 # Get in Touch
 I'd love to hear from you if you're using this! Drop me an email [hello@danrowe.me](hello@danrowe.me)
