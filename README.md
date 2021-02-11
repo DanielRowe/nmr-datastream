@@ -48,7 +48,7 @@ A datastream file will contain the following information:
     - [deadDamList](#deadDamList)
     - [cowListComplete](#cowListComplete)
     - [toJSON](#toJSON)
-    - findCowInformation
+    - [findCowInformation](#findCowInformation)
   - [Utils](#utils)
     - [toDate](#todate)
     - breedCodeToText
@@ -357,6 +357,23 @@ datastream *(string)* - String of datastream contents <br />cowListComplete *(bo
   deadDams: array // If in datastream. See deadDams function for more info
 }
 ```
+
+## findCowInformation
+`findCowInformation(datastream (string), { id, lineNumber, DSIdentifier })`
+
+**Params**
+id: string
+lineNumber: integer 
+DSIdentifier: string
+
+
+This function will search and just return information on the cow you're after - it returns all the information within the [cowListComplete](#cowListComplete) function.
+
+If it finds multiple cows it will return an array of all cows found - for example searching by line number would return any dead cows who shared the same line number.  View the section on [DSIdentifier on the wiki](https://github.com/DanielRowe/nmr-datastream/wiki/DSIdentifier-&-Live-Flag) to help you find the cow your after.
+
+**You must pass at least one param to the function to find a cow**
+
+**Returns** *array*
 
 # Utils
 ## toDate
