@@ -64,3 +64,10 @@ test('If a cow isn\'t found return an empty array.', () => {
 
   expect(data).toBeArrayOfSize(0);
 });
+
+test('No params passed', () => {
+  function noParamsPassed() {
+    findCowInformation(datastream, {});
+  }
+  expect(noParamsPassed).toThrow();
+});

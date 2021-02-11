@@ -9,6 +9,9 @@ export const findCowInformation = (
   },
 ) => {
   let cow: CowListComplete[] = [];
+  if (params && Object.keys(params).length === 0) {
+    throw new Error('No parameters defined to search');
+  }
   const info = completeCowInfo(datastream);
 
   if (typeof params?.id !== 'undefined') { // Search by ID if defined
