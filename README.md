@@ -51,7 +51,7 @@ A datastream file will contain the following information:
     - [findCowInformation](#findCowInformation)
   - [Utils](#utils)
     - [toDate](#todate)
-    - breedCodeToText
+    - [breedCodeToText](#breedCodeToText)
 - [Issues / Feature Requests](#issues-and-feature-requests)
 - [Get in Touch](#get-in-touch)
 - [Contributing](#contributing)
@@ -384,6 +384,17 @@ Simple converter from string date format commonly used within the datastream of 
 Any date after 1980 currently becomes post 2000.
 
 **Returns:** *Date Object*
+
+## breedCodeToText
+`utils.breedCodeToText(number)`
+
+Simple feature to return any breed codes referred to into a human understandable string.
+
+[For a list of breed codes view the wiki.](https://github.com/DanielRowe/nmr-datastream/wiki/Breed-Codes)
+
+If not found will return undefined.
+
+**Returns:** *string or undefined*
 
 # Issues and Feature Requests
 Feel free to submit issues and enhancement requests.
