@@ -15,6 +15,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 15
+      - name: Install modules
+        run: yarn
       - run: npm test
       - run: npm lint
 
@@ -27,6 +29,8 @@ jobs:
         with:
           node-version: 15
           registry-url: https://registry.npmjs.org/
+      - name: Install modules
+        run: yarn
       - run: npm tsc
       - run: npm publish
         env:
@@ -41,6 +45,8 @@ jobs:
         with:
           node-version: 15
           registry-url: https://npm.pkg.github.com/
+      - name: Install modules
+        run: yarn
       - run: npm tsc
       - run: npm publish
         env:
