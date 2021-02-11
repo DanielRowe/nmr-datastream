@@ -1,6 +1,6 @@
 import { CowDefinition } from './deciferDatastream/cowInformation';
 import { LactationInfo } from './deciferDatastream/lactationInformation';
-interface CowListComplete extends CowDefinition {
+export interface CowListComplete extends CowDefinition {
     currentLactationNumber: number | undefined;
     milkSamples: {
         date: Date;
