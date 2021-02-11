@@ -68,5 +68,5 @@ interface CowInfo {
         averageSCC: number;
     };
 }
-export declare const statementInformation: (datastream: string) => CowInfo[];
+export declare const statementInformation: (datastream: string, afterDate?: Date) => CowInfo[];
 export default statementInformation;

@@ -46,5 +46,12 @@ export interface CowDefinition {
         proteinPercentage: number;
     };
 }
-export declare const cowList: (datastream: string) => CowDefinition[];
+export declare const cowList: (datastream: string, params?: {
+    isYoungstock?: boolean | undefined;
+    dateOfBirth?: Date | undefined;
+    dateEnteredHerd?: Date | undefined;
+    inHerd?: boolean | undefined;
+    breedCode?: string | undefined;
+    sireIdentity?: string | undefined;
+} | undefined) => CowDefinition[];
 export default cowList;
