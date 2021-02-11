@@ -8,6 +8,7 @@ import { lactationsList } from './deciferDatastream/lactationInformation';
 import { statementInformation } from './deciferDatastream/statementInformation';
 import { cowListComplete } from './cowListComplete';
 import { toJSON } from './toJSON';
+import { findCowInformation } from './findCowInformation';
 
 import {
   services,
@@ -37,5 +38,6 @@ export {
   calvings,
   cowListComplete,
   toJSON,
+  findCowInformation,
   utils,
 };

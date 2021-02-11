@@ -1,5 +1,5 @@
 export declare const breedCodes: {
-    Breed: string;
-    Code: number;
+    breed: string;
+    code: number;
 }[];
 export default breedCodes;
