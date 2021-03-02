@@ -26,7 +26,7 @@ export const samples = (datastream: string) => {
   }[] = [];
 
   statements.map((statement) => { // Filter though each statement - just sort samples.
-    if (statement.milkSamples.length > 1) { // Only bother if there are samples...
+    if (statement.milkSamples.length >= 1) { // Only bother if there are samples...
       statement.milkSamples.map((sample) => milkSamples.push({
         DSIdentifier: statement.DSIdentifier,
         liveFlag: statement.liveFlag,
@@ -62,7 +62,7 @@ export const services = (datastream:string) => {
   }[] = [];
 
   statements.map((statement) => {
-    if (statement.services.length > 1) {
+    if (statement.services.length >= 1) {
       statement.services.map((service) => allServices.push({
         DSIdentifier: statement.DSIdentifier,
         liveFlag: statement.liveFlag,
@@ -93,7 +93,7 @@ export const healthEvents = (datastream: string) => {
   }[] = [];
 
   statements.map((statement) => {
-    if (statement.services.length > 1) {
+    if (statement.services.length >= 1) {
       statement.otherEvents.map((event) => {
         const acceptedValues = ['Sick', 'Mastitis', 'Lameness'];
         // If the event has one of the previous values - add it to our health events array.
@@ -132,7 +132,7 @@ export const otherEvents = (datastream: string) => {
   }[] = [];
 
   statements.map((statement) => {
-    if (statement.services.length > 1) {
+    if (statement.services.length >= 1) {
       statement.otherEvents.map((event) => {
         const acceptedValues = ['Sick', 'Mastitis', 'Lameness'];
         // If the event isn't one of the previous values - add it to our array.
