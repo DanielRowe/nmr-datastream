@@ -35,10 +35,3 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          registry-url: https://npm.pkg.github.com/
-      - name: Install modules
-        run: yarn
-      - run: npm run tsc
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
