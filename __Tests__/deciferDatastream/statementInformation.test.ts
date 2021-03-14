@@ -25,7 +25,7 @@ test('Each statement should have cow information', () => {
 
 test('First cow should match expected sample results', () => {
   const data = statementInformation(datastream);
-  
+
   expect(data[0].milkSamples).toEqual(
     expect.toBeArray(),
   );
