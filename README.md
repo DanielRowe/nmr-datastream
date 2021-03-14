@@ -132,7 +132,7 @@ Will find an overview of each sampling date including total animals and animals 
 [See Wiki for more](https://github.com/DanielRowe/nmr-datastream/wiki/Herd-Recordings)
 
 ## cowList
-`cowList(datastream (string))`
+`cowList(datastream (string), params)`
 
 Will find the cow information within the datastream file and return it all as a useful array of objects.
 
@@ -327,9 +327,11 @@ A complete array of data of the current lactation from the datastream file, cont
 }
 ```
 ## cowListComplete
-`cowListComplete(datastream (string))`
+`cowListComplete(datastream (string), params)`
 
 A list of all the cows from the datastream with all relevant information including milk samples, services, events, lactations and general cow information combined.
+
+You can filter results in the same way as the [cowList](#cowList) function, [please see the wiki for available params.](https://github.com/DanielRowe/nmr-datastream/wiki/Cow-List)
 
 This function combines the [cowList](#cowList), [lactationsList](#lactationList) and [statementInformation](#statementInformation).
 
