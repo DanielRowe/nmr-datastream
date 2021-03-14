@@ -94,7 +94,7 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
 
   statementInfoFromDatastream.map((info) => {
     const prependOne = `1,${info}`; // Adds a 1 to the first line - means we can latter identify type in switch.
-    const extraNumbering = prependOne.replace(/S([A-Z0-9]{1})/g, 'S$1$1'); // during split we loose the row number - add an extra for good measure.
+    const extraNumbering = prependOne.replace(/S([A-Z0-9]{1})/g, 'S$1,$1'); // during split we loose the row number - add an extra for good measure.
     const rows = extraNumbering.split(/S[A-Z0-9]{1},/g); // Split down the rows.
     let cow: CowInfo = {
       milkSamples: [],
