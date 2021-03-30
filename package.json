@@ -20,7 +20,7 @@
     "url": "https://github.com/DanielRowe/nmr-datastream.git"
   },
   "dependencies": {
-    "adm-zip": "^0.5.2",
+    "adm-zip": "^0.5.4",
     "file-type": "^16.2.0",
     "jest-extended": "^0.11.5"
   },
