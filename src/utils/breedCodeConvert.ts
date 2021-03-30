@@ -1,9 +1,9 @@
 import breedCodes from '../lookups/breedCodes';
 
-export const breedCodeToText = (code: number) => {
-  const find = breedCodes.find((x) => x.code === code);
+export const breedCodeToText = (code: string) => {
+  const find = breedCodes.find((x) => x.breed === code);
 
-  return find?.breed;
+  return find?.breed_Lit;
 };
 
 const all = {

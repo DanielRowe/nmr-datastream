@@ -386,7 +386,7 @@ Any date after 1980 currently becomes post 2000.
 **Returns:** *Date Object*
 
 ## breedCodeToText
-`utils.breedCodeToText(number)`
+`utils.breedCodeToText(string)`
 
 Simple feature to return any breed codes referred to into a human understandable string.
 
