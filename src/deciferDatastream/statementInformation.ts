@@ -86,7 +86,11 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
     throw new Error('Lactation section not found whilst building statements');
   }
 
-  const statementInfoFromDatastream = datastream.substring(statementInfoStart, lactationInfoStart).split('S1,');
+  if (!/S1,(?![A-Z0-9\s]{12})/g.test(datastream.substring(statementInfoStart, lactationInfoStart))) {
+    throw new Error('No statement information found');
+  }
+
+  const statementInfoFromDatastream = datastream.substring(statementInfoStart, lactationInfoStart).split(/S1,(?![A-Z0-9\s]{12})/);
   if (statementInfoFromDatastream.length === 0) {
     throw new Error('Statements not found');
   }
@@ -94,8 +98,10 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
 
   statementInfoFromDatastream.map((info) => {
     const prependOne = `1,${info}`; // Adds a 1 to the first line - means we can latter identify type in switch.
-    const extraNumbering = prependOne.replace(/S([A-Z0-9]{1})/g, 'S$1,$1'); // during split we loose the row number - add an extra for good measure.
-    const rows = extraNumbering.split(/S[A-Z0-9]{1},/g); // Split down the rows.
+    // On the next to lines the check for not having 12 digits
+    // after is if SW is used as a breed code on service info
+    const extraNumbering = prependOne.replace(/S([A-Z0-9]{1}),(?![A-Z0-9\s]{12})/g, 'S$1,$1,'); // during split we loose the row number - add an extra for good measure.
+    const rows = extraNumbering.split(/S[A-Z0-9]{1},(?![A-Z0-9\s]{12})/g); // Split down the rows.
     let cow: CowInfo = {
       milkSamples: [],
       services: [],
