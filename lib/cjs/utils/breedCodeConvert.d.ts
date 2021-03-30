@@ -1,5 +1,5 @@
-export declare const breedCodeToText: (code: number) => string | undefined;
+export declare const breedCodeToText: (code: string) => string | undefined;
 declare const all: {
-    breedCodeToText: (code: number) => string | undefined;
+    breedCodeToText: (code: string) => string | undefined;
 };
 export default all;
