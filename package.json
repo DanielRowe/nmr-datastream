@@ -1,6 +1,6 @@
 {
   "name": "nmr-datastream",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "description": "Converts NMR Datastream specification to JS Objects - allowing access to milk recording data.",
   "scripts": {
     "test": "npx jest",
@@ -20,8 +20,8 @@
     "url": "https://github.com/DanielRowe/nmr-datastream.git"
   },
   "dependencies": {
-    "adm-zip": "^0.5.2",
-    "file-type": "^16.2.0",
+    "adm-zip": "^0.5.4",
+    "file-type": "^16.3.0",
     "jest-extended": "^0.11.5"
   },
   "devDependencies": {
