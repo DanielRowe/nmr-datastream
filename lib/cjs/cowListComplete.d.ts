@@ -55,5 +55,12 @@ export interface CowListComplete extends CowDefinition {
     } | undefined;
     allLactations: LactationInfo[];
 }
-export declare const cowListComplete: (datastream: string) => CowListComplete[];
+export declare const cowListComplete: (datastream: string, params?: {
+    isYoungstock?: boolean | undefined;
+    dateOfBirth?: Date | undefined;
+    dateEnteredHerd?: Date | undefined;
+    inHerd?: boolean | undefined;
+    breedCode?: string | undefined;
+    sireIdentity?: string | undefined;
+} | undefined) => CowListComplete[];
 export default cowListComplete;

@@ -39,13 +39,15 @@ export const deadDams = (datastream: string) => {
   if (datastream.indexOf('W1') > 0) {
     deadDamInfoEnd = datastream.indexOf('W1');
   }
-  const deadDamInfoFromDatastream = datastream.substring(deadDamInfoStart, deadDamInfoEnd).split('D1,');
+  const deadDamInfoFromDatastream = datastream.substring(deadDamInfoStart, deadDamInfoEnd).split(/D1,(?![A-Z0-9\s]{12})/);
   deadDamInfoFromDatastream.shift(); // First value is always blank - skip.
 
   deadDamInfoFromDatastream.map((info) => {
-    const prependOne = `1,${info}`; // Adds a 1 to the first line - means we can latter identify type in switch.
-    const extraNumbering = prependOne.replace(/D(\d)/gi, 'D$1$1'); // during split we loose the row number - add an extra for good measure.
-    const rows = extraNumbering.split(/D\d/); // Split down the rows.
+    const prependOne = `D1,${info}`; // Adds a 1 to the first line - means we can latter identify type in switch.
+    // Excludes any data that could be an identity after - provides a fix for alpha-numeric
+    // breed codes.
+    const extraNumbering = prependOne.replace(/D([0-9]{1}),(?![A-Z0-9\s]{12})/gi, 'D$1,$1,'); // during split we loose the row number - add an extra for good measure.
+    const rows = extraNumbering.split(/D[0-9]{1},(?![A-Z0-9\s]{12})/); // Split down the rows.
 
     let dam:DamInformation = {
       ptas: [],

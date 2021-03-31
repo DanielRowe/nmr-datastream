@@ -86,7 +86,11 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
     throw new Error('Lactation section not found whilst building statements');
   }
 
-  const statementInfoFromDatastream = datastream.substring(statementInfoStart, lactationInfoStart).split('S1,');
+  if (!/S1,(?![A-Z0-9\s]{12})/g.test(datastream.substring(statementInfoStart, lactationInfoStart))) {
+    throw new Error('No statement information found');
+  }
+
+  const statementInfoFromDatastream = datastream.substring(statementInfoStart, lactationInfoStart).split(/S1,(?![A-Z0-9\s]{12})/);
   if (statementInfoFromDatastream.length === 0) {
     throw new Error('Statements not found');
   }
@@ -210,7 +214,7 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
             serviceSireBreed,
             serviceSireIdentity,
             serviceSireIdType,
-            serviceSireAuthentic,
+            serviceSireAuthentic,,
             pdStatus, // 0 = Not diagnosed, 1 = not pregnant, 2 = Pregnant
           ] = statement;
           const pdStatusLookup = [

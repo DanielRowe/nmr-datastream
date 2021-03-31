@@ -55,9 +55,16 @@ export interface CowListComplete extends CowDefinition {
     allLactations: LactationInfo[];
 }
 
-export const cowListComplete = (datastream: string) => {
+export const cowListComplete = (datastream: string, params?: {
+  isYoungstock?: boolean,
+  dateOfBirth?: Date,
+  dateEnteredHerd?: Date,
+  inHerd?: boolean,
+  breedCode?: string,
+  sireIdentity?: string,
+}) => {
   const completeCows: CowListComplete[] = [];
-  const cows = cowList(datastream);
+  const cows = cowList(datastream, params);
   const statements = statementInformation(datastream);
   const lactations = lactationInformation(datastream);
 

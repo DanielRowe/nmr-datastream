@@ -11,7 +11,7 @@ beforeAll(async () => {
 });
 
 test('Returns a list of all the bulls', () => {
-  expect(bullList(datastream)).toHaveLength(67);
+  expect(bullList(datastream)).toHaveLength(66);
 });
 
 test('Each bull should have a short name, long name, breed and herdbook number', () => {
