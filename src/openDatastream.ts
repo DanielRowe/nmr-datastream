@@ -30,9 +30,8 @@ export const openDatastream = async (file: string | Buffer | URL | fs.FileHandle
       zip.getEntries().map((zipFile) => {
         if (zipFile.entryName === 'DSMEMBER.DAT') { // Providing we find the right file - return.
           result = zipFile.getData().toString('utf-8');
-          return result; // Get data and convert to string.
         }
-        return result;
+        return result; // Get data and convert to string.
       });
       if (result === '') {
         throw new Error('DSMember.DAT not found within EXE');
@@ -53,9 +52,8 @@ export const openDatastream = async (file: string | Buffer | URL | fs.FileHandle
       zip.getEntries().map((zipFile) => {
         if (zipFile.entryName === 'DSMEMBER.DAT') { // Providing we find the right file - return.
           result = zipFile.getData().toString('utf-8');
-          return result;
         }
-        return false;
+        return result;
       });
       if (result === '') {
         throw new Error('DSMember.DAT not found within EXE');
