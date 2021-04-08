@@ -45,7 +45,7 @@ export const herdInformation = (datastream: string) => {
   // Ignore any data at cattle info start, then split by HD to array
   const herdRecordings = datastream.substring(0, cattleInfoStart).split('HD,');
 
-  if (herdRecordings.length === 0) {
+  if (herdRecordings.length === 1) {
     throw new Error('No herd records found');
   }
 

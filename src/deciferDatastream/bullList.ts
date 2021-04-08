@@ -101,7 +101,6 @@ export const bullList = (datastream: string) => {
           break;
         }
         default:
-          return false;
       }
       return bull;
     });

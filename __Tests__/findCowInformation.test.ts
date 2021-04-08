@@ -64,6 +64,16 @@ test('If a cow isn\'t found return an empty array.', () => {
 
   expect(data).toBeArrayOfSize(0);
 });
+test('If a cow isn\'t found by alternate id return an empty array.', () => {
+  const data = findCowInformation(datastream, { id: '1234' });
+
+  expect(data).toBeArrayOfSize(0);
+});
+test('If a cow isn\'t found return an empty array.', () => {
+  const data = findCowInformation(datastream, { DSIdentifier: '01|1222' });
+
+  expect(data).toBeArrayOfSize(0);
+});
 
 test('No params passed', () => {
   function noParamsPassed() {

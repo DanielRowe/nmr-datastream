@@ -90,10 +90,6 @@ export const cowList = (
   const reAddRegion = datastreamInfo.replace(/C1,(\d\d),/g, 'C1,$1,$1,');
   const cowInfo = reAddRegion.split(/C1,\d\d,/g);
 
-  if (cowInfo.length === 0) {
-    throw new Error('No cow information found');
-  }
-
   const cows: CowDefinition[] = []; // Create empty array to populate.
 
   cowInfo.shift(); // First value is always blank - ignore it.

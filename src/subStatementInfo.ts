@@ -242,7 +242,7 @@ export const calvings = (datastream:string) => {
     statement.calvings.map((calving) => {
       // If we haven't added it before - best add the calving.
       if ((allCalvings.findIndex((x) => x.date === calving.date)) === -1) {
-        return allCalvings.push({
+        allCalvings.push({
           DSIdentifier: statement.DSIdentifier,
           lineNumber: statement.lineNumber,
           date: calving.date,

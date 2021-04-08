@@ -45,12 +45,28 @@ test('Throws exception to a random data string', () => {
   expect(randomString).toThrow();
 });
 
-test('Throws exception to invalid herd information string', () => {
+test('Throws exception to invalid statement information string', () => {
   function invalidString() {
     statementInformation('S1,a,b,c,HD,L0,');
   }
 
   expect(invalidString).toThrow();
+});
+
+test('Throws exception when lactation records not found', () => {
+  function invalidString() {
+    statementInformation('S0,a,b,c,HD');
+  }
+
+  expect(invalidString).toThrow('Lactation section not found whilst building statements');
+});
+
+test('Throws exception when statement header found but records not found', () => {
+  function invalidString() {
+    statementInformation('S0,a,b,c,HD,L0,');
+  }
+
+  expect(invalidString).toThrow('No statement information found');
 });
 
 test('Expect event dates to only return after date', () => {

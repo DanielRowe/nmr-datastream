@@ -91,9 +91,7 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
   }
 
   const statementInfoFromDatastream = datastream.substring(statementInfoStart, lactationInfoStart).split(/S1,(?![A-Z0-9\s]{12})/);
-  if (statementInfoFromDatastream.length === 0) {
-    throw new Error('Statements not found');
-  }
+
   statementInfoFromDatastream.shift(); // First value is always blank - skip.
 
   statementInfoFromDatastream.map((info) => {
@@ -300,7 +298,7 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
             calf3Sex,
           ] = statement;
 
-          if (cow.calvings.length > 1) { // Providing we have a calving to push to...
+          if (cow.calvings.length >= 1) { // Providing we have a calving to push to...
             cow.calvings[cow.calvings.length - 1]?.calves?.push({ // push to last calving
               breed: calf3Breed,
               id: calf3Identity.trim(),
@@ -416,7 +414,6 @@ export const statementInformation = (datastream: string, afterDate: Date = new D
         // NMR only / Not in use.
           break;
         default:
-          return false;
       }
       return cow;
     });

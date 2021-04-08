@@ -45,10 +45,18 @@ test('Throws exception to a random data string', () => {
   expect(randomString).toThrow();
 });
 
-test('Throws exception to invalid herd information string', () => {
+test('Throws exception to invalid lactation information string', () => {
   function invalidString() {
     lactationInformation('L1,a,b,c,HD,B1,');
   }
 
   expect(invalidString).toThrow();
+});
+
+test('Throws exception when lactation information cannot be found', () => {
+  function invalidString() {
+    lactationInformation('L0,L1');
+  }
+
+  expect(invalidString).toThrow('No lactation information found');
 });

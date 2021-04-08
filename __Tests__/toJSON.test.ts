@@ -33,3 +33,19 @@ test('toJSON should not out put statement / lactation separate if using complete
 
   expect(data).not.toContainKeys(['lactations', 'statementInformation']);
 });
+
+test('toJSON should not crash when no bulls are loaded in the datastream', async () => {
+  const noBulls = await fs.readFile('./__Tests__/information/DSMEMBER-NoBulls.DAT', 'utf8');
+
+  const data = toJSON(noBulls);
+
+  expect(data).not.toContainKeys(['bulls']);
+});
+
+test('toJSON should not crash when no dead dams are loaded in the datastream', async () => {
+  const noDD = await fs.readFile('./__Tests__/information/DSMEMBER-NoDeadDams.DAT', 'utf8');
+
+  const data = toJSON(noDD);
+
+  expect(data).not.toContainKeys(['deadDams']);
+});

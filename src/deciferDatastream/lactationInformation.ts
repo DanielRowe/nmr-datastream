@@ -64,21 +64,27 @@ export const lactationsList = (datastream: string) => {
   if (lactationInfoStart === -1) {
     throw new Error('Lactations not found');
   }
-  const bullInfoStart = datastream.indexOf('B1,');
-  if (lactationInfoStart === -1) {
-    throw new Error('Bull section not found whilst building lactations');
+
+  // Try and find the next section - if none exist default to end of the file.
+  let nextIndexStart = datastream.length;
+  if (datastream.indexOf('B1,') !== -1) {
+    nextIndexStart = datastream.indexOf('B1,');
+  }
+  if (datastream.indexOf('D1,') !== -1) {
+    nextIndexStart = datastream.indexOf('D1,');
+  }
+  if (datastream.indexOf('W1,') !== -1) {
+    nextIndexStart = datastream.indexOf('W1,');
   }
 
   const lactationList: LactationInfo[] = [];
 
-  if (!/L1,(?![A-Z0-9\s]{12})(?![0-9],[0-9],[0-9],[0-9]{3},)/g.test(datastream.substring(lactationInfoStart, bullInfoStart))) {
+  if (!/L1,(?![A-Z0-9\s]{12})(?![0-9],[0-9],[0-9],[0-9]{3},)/g.test(datastream.substring(lactationInfoStart, nextIndexStart))) {
     throw new Error('No lactation information found');
   }
 
-  const lactationInfoFromDatastream = datastream.substring(lactationInfoStart, bullInfoStart).split(/L1,(?![A-Z0-9\s]{12})(?![0-9],[0-9],[0-9],[0-9]{3},)/);
-  if (lactationInfoFromDatastream.length === 0) {
-    throw new Error('Lactations not found');
-  }
+  const lactationInfoFromDatastream = datastream.substring(lactationInfoStart, nextIndexStart).split(/L1,(?![A-Z0-9\s]{12})(?![0-9],[0-9],[0-9],[0-9]{3},)/);
+
   lactationInfoFromDatastream.shift(); // First value is always blank - skip.
 
   lactationInfoFromDatastream.map((info) => {

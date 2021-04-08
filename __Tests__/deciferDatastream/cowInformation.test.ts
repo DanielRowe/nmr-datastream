@@ -76,3 +76,17 @@ test('Expect dateOfBirth to only return animals born after date', () => {
     ]),
   );
 });
+
+test('Throw an exception when no S records found', () => {
+  const noStatement = () => {
+    const noStatementInfo = `
+C1,10,93972,01,2,0713,01,890001500753,2,2,0,0,                        ,03080
+C2,00,000000000000,031204,0,031204,060510,2,000000,0000000000000000000,03407
+C3,D HUNTER ROSE       ,D HUNTER ROSE                           ,     ,03400
+C4,63,194720153   ,1,0,01,890001700230,2,2,0,                         ,03016
+C5,01,97,070604,+0181,+0097,+0081,+0004,+0003,35,                     ,03111`;
+
+    return cowInformation(noStatementInfo);
+  };
+  expect(noStatement).toThrow();
+});

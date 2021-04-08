@@ -56,6 +56,14 @@ test('Throws exception to a random data string', () => {
   expect(randomString).toThrow();
 });
 
+test('Throws exception when no HD record found', () => {
+  function randomString() {
+    herdRecordings('C1, S0, L1');
+  }
+
+  expect(randomString).toThrow('No herd records found');
+});
+
 test('Throws exception to invalid herd information string', () => {
   function invalidString() {
     herdRecordings('HD,a,b,c,HD,C1');
