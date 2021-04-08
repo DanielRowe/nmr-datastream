@@ -4,14 +4,14 @@ import { openDatastream } from '../src/openDatastream';
 
 test('Opens a .DAT datastream file from file path', async () => {
   const data = await openDatastream('./__Tests__/information/DSMEMBER.DAT');
-  expect(data).toHaveLength(769628); // Example file has that many characters.
+  expect(data).toHaveLength(770174); // Example file has that many characters.
 });
 
 test('Opens a DAT datastream from buffer', async () => {
   const file = await fs.readFile('./__Tests__/information/DSMEMBER.DAT');
   const data = await openDatastream(file);
 
-  expect(data).toHaveLength(769628); // Example file has that many characters.
+  expect(data).toHaveLength(770174); // Example file has that many characters.
 });
 
 test('Error when DSMEMBER.DAT isn\'t found in self extracting exe if opened as buffer', async () => {

@@ -272,13 +272,14 @@ export const lactationsList = (datastream: string) => {
           };
           if (naturalOr305 === '4') {
             cow.qualifyingLactation = thisLactation;
-          } else if (naturalOr305 === '5') {
+          }
+          if (naturalOr305 === '5') {
             cow.naturalLactation = thisLactation;
           }
           break;
         }
         default:
-          return false;
+          break;
       }
       return cow;
     });
