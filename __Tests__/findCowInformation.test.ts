@@ -81,3 +81,17 @@ test('No params passed', () => {
   }
   expect(noParamsPassed).toThrow();
 });
+
+test('A historic cow with no sold date should still be marked as sold', () => {
+  const data = findCowInformation(datastream, { DSIdentifier: '0084|1' });
+
+  expect(data).toBeArrayOfSize(1);
+
+  expect(data).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        inHerd: false,
+      }),
+    ]),
+  );
+});
