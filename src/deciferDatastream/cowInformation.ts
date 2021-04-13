@@ -158,7 +158,7 @@ export const cowList = (
       dateOfBirth: toDate(dateOfBirth),
       dateEnteredHerd: (dateEnteredHerd !== '000000') ? toDate(dateEnteredHerd) : null,
       dateLeftHerd: (dateLeftHerd !== '000000') ? toDate(dateLeftHerd) : null,
-      inHerd: (dateLeftHerd === '000000'),
+      inHerd: (parseInt(liveFlag, 10) === 0),
       leftHerd: (dateLeftHerd !== '000000') ? {
         date: toDate(dateLeftHerd),
         reason: leftHerdReason.find((x) => x.case === reasonLeftHerd)?.value,
