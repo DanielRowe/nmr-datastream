@@ -22,7 +22,7 @@
   "dependencies": {
     "adm-zip": "^0.5.5",
     "file-type": "^16.3.0",
-    "jest-extended": "^0.11.5"
+    "jest-extended": "^1.0.0"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.4.33",
